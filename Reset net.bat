@@ -35,7 +35,8 @@ cls
 dism /online /cleanup-image /restorehealth
 cls
 @echo processo finalizado
-@echo comandos utilizados:
+@echo.
+@echo [*] comandos utilizados:
 @echo ############################################
 @echo --Sfc /ScanNow
 @echo --dism /online /cleanup-image /scanhealth
