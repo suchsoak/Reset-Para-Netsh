@@ -8,9 +8,15 @@
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo.
 set /p escolha= escolha uma opcao:
-@echo ****************************
+@echo.
 if %escolha% equ 1 goto escolha1 
 if %escolha% equ 2 goto escolha2
+
+:echolha2 
+cls
+exit
+
+@echo.
 
 :escolha1
 @echo::::::::::::::::::::::::::::::::::::::::::::
@@ -24,11 +30,11 @@ ipconfig /renew
 ipconfig /renew6
 ipconfig /flushdns
 
-@echo "Configuracao de ip concluida" &&timeout /t 5 > null
+@echo Configuracao de ip concluida &&timeout /t 5 > null
 @echo.
-@echo "-----------------------------"
+@echo -----------------------------
 @echo.
-@echo "Configurando Netsh..." &&timeout /t 6 >null
+@echo Configurando Netsh... &&timeout /t 6 >null
 @echo.
 netsh winsock reset all
 netsh int 6to4 reset all
@@ -39,13 +45,9 @@ netsh int isatap reset all
 netsh int portproxy reset all
 netsh int tcp reset all
 netsh int teredo reset all
-
-:echolha2 
-cls
-exit
-
-@Echo Netsh configurado, agora reinicie o computador...
-
+@echo.
+@echo Netsh configurado, agora reinicie o computador...
+@echo.
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo:: [*] 3. Reiniciar o computador
 @echo:: [*] 4. Nao reiniciar
@@ -53,7 +55,7 @@ exit
 
 set /p escolha= escolha uma opcao:
 
-@echo ****************************
+@echo.
 
 if %escolha% equ 3 goto escolha3 
 if %escolha% equ 4 goto escolha4
