@@ -1,9 +1,13 @@
 @echo off
-date /t
-
+@echo github: https://github.com/suchsoak
+@echo.
+@echo [!] informacoes de disco:
+@echo.
+wmic diskdrive list brief
+@echo -----
 @echo::::::::::::::::::::::::::::::::::::::::::::
-@echo:: * 1. Resetar redes do computador
-@echo:: * 2. Sair do terminal 
+@echo:: [*] 1. Verificar discos
+@echo:: [*] 2. Sair do terminal 
 @echo::::::::::::::::::::::::::::::::::::::::::::
 
 set /p escolha= escolha uma opcao:
@@ -13,60 +17,65 @@ if %escolha% equ 2 goto escolha2
 
 :escolha1
 @echo::::::::::::::::::::::::::::::::::::::::::::
-@echo:: Resetadores de rede
+@echo:: Verificadores de disco
 @echo:: Certifiquese que voce esta como admin
 @echo::::::::::::::::::::::::::::::::::::::::::::
-
-date /t
-echo maquina: %computername%   Usuario:%username% 
-
-@Echo Configurando ip
-
-ipconfig /release
-ipconfig /renew
-ipconfig /flushdns
-
-Echo "Configuracao de ip concluida"
-
-Echo "-----------------------------"
-
-Echo "Configurando Netsh..."
-netsh winsock reset all
-netsh int 6to4 reset all
-netsh int ipv4 reset all
-netsh int ipv6 reset all
-netsh int httpstunnel reset all
-netsh int isatap reset all
-netsh int portproxy reset all
-netsh int tcp reset all
-netsh int teredo reset all
+@echo ##########################
+@echo Iniciando codigo Sfc /ScanNow
+@echo ##########################
+Sfc /ScanNow
+@echo ##########################
+@echo Iniciando dism /online /cleanup-image /scanhealth
+@echo ##########################
+dism /online /cleanup-image /scanhealth
+cls
+@echo ##########################
+@echo Iniciando dism /online /cleanup-image /restorehealth
+@echo ##########################
+dism /online /cleanup-image /restorehealth
+cls
+@echo processo finalizado
+@echo comandos utilizados:
+@echo ############################################
+@echo --Sfc /ScanNow
+@echo --dism /online /cleanup-image /scanhealth
+@echo --dism /online /cleanup-image /restorehealth
+@echo ############################################
 @pause
 
-:echolha2 
-cls
-exit
+@echo caso queria fazer uma verificação mais completa existe o comando chkdsk /r.
+@echo Porem nesse comando seu computador precisara ser reiniciado e isso levara tempo.
 
-@Echo Netsh configurado, agora reinicie o computador...
+@echo::::::::::::::::::::::::::::::::::::::::::::--
+@echo::AVISO depois de executar o comando e reiniciar o pc, tenha em mente que isso levara tempo, dependendo da sua maquina.
+@echo::::::::::::::::::::::::::::::::::::::::::::-- 
 
 @echo::::::::::::::::::::::::::::::::::::::::::::
-@echo:: * 3. Reiniciar o computador
-@echo:: * 4. Nao reiniciar
+@echo:: [*] 3. Executar o comando chkdsk /r
+@echo:: [*] 4. Nao executar o comando
 @echo:::::::::::::::::::::::::::::::::::::::::::: 
 
-set /p escolha= escolha uma opcao:
+set /p escolha=  escolha uma opcao: 
 
-echo ****************************
-
-if %escolha% equ 3 goto escolha3 
+if %escolha% equ 3 goto escolha3
 if %escolha% equ 4 goto escolha4
 
 :escolha3
-@echo O sistema sera reiniciado em breve, caso tenho que salvar algum arquivo esse é o momento.		
-shutdown /r
-@pause
 
-:escolha4
+@echo::::::::::::::::::::::::::::::::::::::::::::
+@echo:: [*] Executando chkdsk /r
+@echo:::::::::::::::::::::::::::::::::::::::::::: 
+chkdsk /r
+
+@echo::::::::::::::::::::::::::::::::::::::::::::
+@echo:: Por padrao, o seu computador não irar ser reiniciado depois do comando, porem e recomendavel.
+@echo::::::::::::::::::::::::::::::::::::::::::::
+
+
+:escolha4 
 cls
 exit
 
-
+:escolha2
+cls
+exit
