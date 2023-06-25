@@ -6,10 +6,10 @@
 @echo.
 color 4
 timeout 4 >null
-@echo [!] Informacoes De Rede:
+@echo [!] Informacoes De Rede: 
 color 7
 @echo.
-netsh wlan show interfaces | findstr "Perfil"
+netsh wlan show interfaces | findstr "Perfil" 
 netsh wlan show interfaces | findstr "Estado"
 netsh wlan show interfaces | findstr "Sinal"
 netsh wlan show interfaces | findstr "Canal"
@@ -33,23 +33,32 @@ if %escolha% equ 2 goto escolha2
 timeout 3 >null
 cls
 exit
-@echo.
+
 :escolha1
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo:: [!] Resetadores de rede
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo.
-@echo Configurando ipconfig... &&timeout /t 6 >null
-
+@echo Configurando ipconfig... 
+timeout /t 4 >null
 ipconfig /release
+cls
 ipconfig /renew
+cls
 ipconfig /renew6
-
-@echo Configuracao de ip concluida &&timeout /t 5 > null
+cls
+@echo::::::::::::::::::::::::::::::::::::::::::::
+@echo:: [!] Configuracao de ip concluida
+@echo::::::::::::::::::::::::::::::::::::::::::::
+timeout /t 3 > null
 @echo.
 @echo -----------------------------
 @echo.
 @echo Configurando Netsh... &&timeout /t 6 >null
+@echo::::::::::::::::::::::::::::::::::::::::::::
+@echo:: [!] Configurando Netsh... 
+@echo::::::::::::::::::::::::::::::::::::::::::::
+timeout /t 6 >null
 @echo.
 
 netsh winsock reset all
@@ -63,9 +72,13 @@ netsh int tcp reset all
 netsh int teredo reset all
 netsh int ip reset
 netsh interface reset all
+
 cls
+
 @echo.
-@echo Netsh configurado, agora reinicie o computador...
+@echo -------------------------------------------------
+@echo Netsh configurado, agora reinicie o computador.
+@echo -------------------------------------------------
 @echo.
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo:: [*] 3. Reiniciar o computador
