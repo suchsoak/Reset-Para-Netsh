@@ -39,7 +39,9 @@ exit
 @echo:: [!] Resetadores de rede
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo.
-@echo Configurando ipconfig... 
+@echo::::::::::::::::::::::::::::::::::::::::::::
+@echo:: [*] Configurando ipconfig...
+@echo:::::::::::::::::::::::::::::::::::::::::::: 
 timeout /t 4 >null
 ipconfig /release
 cls
@@ -48,13 +50,10 @@ cls
 ipconfig /renew6
 cls
 @echo::::::::::::::::::::::::::::::::::::::::::::
-@echo:: [!] Configuracao de ip concluida
+@echo:: [!] Configuracao de ip concluida.
 @echo::::::::::::::::::::::::::::::::::::::::::::
 timeout /t 3 > null
 @echo.
-@echo -----------------------------
-@echo.
-@echo Configurando Netsh... &&timeout /t 6 >null
 @echo::::::::::::::::::::::::::::::::::::::::::::
 @echo:: [!] Configurando Netsh... 
 @echo::::::::::::::::::::::::::::::::::::::::::::
